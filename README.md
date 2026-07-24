@@ -35,6 +35,8 @@ After updating conclusions, refresh `findings/notable.md`.
 streamlit run app/streamlit_app.py
 ```
 
+The dashboard includes a genre dropdown (default: most common genre in the cleaned cohort). Multi-label games match if they include the selected genre.
+
 ## Cleaning rules (v1)
 
 - Metric: `main_story` hours
