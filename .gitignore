@@ -4,3 +4,5 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 01_analysis.executed.ipynb
+
+*.egg-info/
