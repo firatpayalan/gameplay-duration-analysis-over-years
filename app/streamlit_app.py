@@ -57,9 +57,9 @@ def main() -> None:
         "annual medians run from "
         f"**{first['median_main_story']:.1f}h** in {int(first['year'])} to "
         f"**{last['median_main_story']:.1f}h** in {int(last['year'])}. "
-        "Treat those endpoints cautiously: early years are dominated by very short "
-        "arcade-era titles, while late years—especially 2019—may be thin or incomplete "
-        "in this dataset. Years with fewer than 30 games are omitted."
+        "Treat those endpoints cautiously: they can be sensitive to sample "
+        "composition and thin years in this genre cohort. "
+        "Years with fewer than 30 games are omitted."
     )
 
     fig = make_subplots(specs=[[{"secondary_y": True}]])
