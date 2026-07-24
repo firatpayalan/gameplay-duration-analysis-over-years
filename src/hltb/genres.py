@@ -11,10 +11,14 @@ def _genre_tokens(df: pd.DataFrame) -> pd.Series:
         .fillna("")
         .astype(str)
         .str.split(",")
+        .apply(
+            lambda parts: list(
+                dict.fromkeys(p.strip() for p in parts if p.strip())
+            )
+        )
         .explode()
-        .str.strip()
     )
-    return tokens[tokens != ""]
+    return tokens.dropna()
 
 
 def genre_counts(df: pd.DataFrame) -> pd.Series:

@@ -48,48 +48,47 @@ def main() -> None:
 
     if trend.empty:
         st.warning(f"No years have at least 30 cleaned {selected} games — nothing to chart.")
-        return
+    else:
+        first = trend.iloc[0]
+        last = trend.iloc[-1]
+        st.write(
+            f"For **{selected}**, among **{len(subset):,}** cleaned games, the included "
+            "annual medians run from "
+            f"**{first['median_main_story']:.1f}h** in {int(first['year'])} to "
+            f"**{last['median_main_story']:.1f}h** in {int(last['year'])}. "
+            "Treat those endpoints cautiously: they can be sensitive to sample "
+            "composition and thin years in this genre cohort. "
+            "Years with fewer than 30 games are omitted."
+        )
 
-    first = trend.iloc[0]
-    last = trend.iloc[-1]
-    st.write(
-        f"For **{selected}**, among **{len(subset):,}** cleaned games, the included "
-        "annual medians run from "
-        f"**{first['median_main_story']:.1f}h** in {int(first['year'])} to "
-        f"**{last['median_main_story']:.1f}h** in {int(last['year'])}. "
-        "Treat those endpoints cautiously: they can be sensitive to sample "
-        "composition and thin years in this genre cohort. "
-        "Years with fewer than 30 games are omitted."
-    )
+        fig = make_subplots(specs=[[{"secondary_y": True}]])
+        fig.add_trace(
+            go.Scatter(
+                x=trend["year"],
+                y=trend["median_main_story"],
+                mode="lines+markers",
+                name="Median main_story (h)",
+            ),
+            secondary_y=False,
+        )
+        fig.add_trace(
+            go.Bar(
+                x=trend["year"],
+                y=trend["n"],
+                name="Games (n)",
+                opacity=0.3,
+            ),
+            secondary_y=True,
+        )
+        fig.update_layout(
+            title=f"{selected}: median main_story hours by release year",
+            hovermode="x unified",
+        )
+        fig.update_yaxes(title_text="Median hours", secondary_y=False)
+        fig.update_yaxes(title_text="Game count", secondary_y=True)
+        st.plotly_chart(fig, use_container_width=True)
 
-    fig = make_subplots(specs=[[{"secondary_y": True}]])
-    fig.add_trace(
-        go.Scatter(
-            x=trend["year"],
-            y=trend["median_main_story"],
-            mode="lines+markers",
-            name="Median main_story (h)",
-        ),
-        secondary_y=False,
-    )
-    fig.add_trace(
-        go.Bar(
-            x=trend["year"],
-            y=trend["n"],
-            name="Games (n)",
-            opacity=0.3,
-        ),
-        secondary_y=True,
-    )
-    fig.update_layout(
-        title=f"{selected}: median main_story hours by release year",
-        hovermode="x unified",
-    )
-    fig.update_yaxes(title_text="Median hours", secondary_y=False)
-    fig.update_yaxes(title_text="Game count", secondary_y=True)
-    st.plotly_chart(fig, use_container_width=True)
-
-    st.subheader("Notable findings")
+    st.subheader("Overall notable findings")
     if FINDINGS.is_file():
         st.markdown(FINDINGS.read_text(encoding="utf-8"))
     else:

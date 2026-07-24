@@ -28,6 +28,14 @@ def test_genre_counts_explodes_multi_label(genre_df: pd.DataFrame):
     assert "" not in counts.index
 
 
+def test_genre_counts_counts_duplicate_tokens_once_per_game():
+    df = pd.DataFrame({"genres": ["Action, Action, Adventure"]})
+
+    counts = genre_counts(df)
+
+    assert counts.to_dict() == {"Action": 1, "Adventure": 1}
+
+
 def test_top_genre(genre_df: pd.DataFrame):
     assert top_genre(genre_df) == "Action"
 
