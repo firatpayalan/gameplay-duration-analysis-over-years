@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 
 import pandas as pd
@@ -22,5 +23,6 @@ def test_load_games_returns_dataframe_with_expected_columns():
 
 def test_load_games_missing_file_raises_clear_error(tmp_path: Path):
     missing = tmp_path / "nope.csv"
-    with pytest.raises(FileNotFoundError, match=str(missing)):
+    expected = rf"{re.escape(str(missing))}.*Copy games\.csv into data/raw/"
+    with pytest.raises(FileNotFoundError, match=expected):
         load_games(missing)

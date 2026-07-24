@@ -8,7 +8,7 @@ _DATE_COLS = ("release_na", "release_eu", "release_jp")
 
 
 def _year_from_series(series: pd.Series) -> pd.Series:
-    parsed = pd.to_datetime(series, errors="coerce", format="mixed")
+    parsed = pd.to_datetime(series.astype("string"), errors="coerce", format="mixed")
     years = parsed.dt.year
     return years.astype("Int64")
 

@@ -1,5 +1,6 @@
-- Median main-story length rose from about **0.5h** in 1982 to about **6.5h** in 2019 (years with fewer than 30 games excluded).
+- The long-run increase is clearest in decade medians: about **1.0h** in the 1980s, **3.0h** in the 1990s, and **7.0h** in the 2000s; the 2010s median is **4.5h**.
+- The annual series runs from **0.5h** in 1982 to **6.5h** in 2019, but these are not like-for-like endpoints: early years are dominated by very short arcade-era titles, and 2019 has only **174** games versus **736** in 2018 (whose median is **4.0h**).
 - The cleaned cohort has **15,681** games with both `main_story` and a parseable release year.
 - Roughly **51.8%** of raw rows lack `main_story`, so trends reflect games with recorded times only.
 - Release year uses NA, then EU, then JP dates; regional gaps can shift a game’s year.
-- This dataset dump ends around **2020**, so recent years may be incomplete.
+- Years with fewer than 30 games are excluded. The dataset dump ends around **2020**, so late years—especially 2019—may be thin or incomplete and should not be used to oversell the endpoint.

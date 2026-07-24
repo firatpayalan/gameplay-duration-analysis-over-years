@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from pathlib import Path
-
 import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
@@ -38,10 +36,12 @@ def main() -> None:
     first = trend.iloc[0]
     last = trend.iloc[-1]
     st.write(
-        f"Among **{n_cleaned:,}** cleaned games, median main-story length moved from "
+        f"Among **{n_cleaned:,}** cleaned games, the included annual medians run from "
         f"**{first['median_main_story']:.1f}h** in {int(first['year'])} to "
-        f"**{last['median_main_story']:.1f}h** in {int(last['year'])} "
-        f"(years with fewer than 30 games omitted)."
+        f"**{last['median_main_story']:.1f}h** in {int(last['year'])}. "
+        "Treat those endpoints cautiously: early years are dominated by very short "
+        "arcade-era titles, while late years—especially 2019—may be thin or incomplete "
+        "in this dataset. Years with fewer than 30 games are omitted."
     )
 
     fig = make_subplots(specs=[[{"secondary_y": True}]])
