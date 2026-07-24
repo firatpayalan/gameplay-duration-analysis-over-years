@@ -1,0 +1,5 @@
+- Median main-story length rose from about **0.5h** in 1982 to about **6.5h** in 2019 (years with fewer than 30 games excluded).
+- The cleaned cohort has **15,681** games with both `main_story` and a parseable release year.
+- Roughly **51.8%** of raw rows lack `main_story`, so trends reflect games with recorded times only.
+- Release year uses NA, then EU, then JP dates; regional gaps can shift a game’s year.
+- This dataset dump ends around **2020**, so recent years may be incomplete.
